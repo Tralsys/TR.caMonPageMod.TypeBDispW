@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="TR.caMonPageMod.TypeBDispW.PageTR01"
+						 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+						 xmlns:local="clr-namespace:TR.caMonPageMod.TypeBDispW"
+						 mc:Ignorable="d" 
+						 Height="800" Width="1280">
+	
+	<UserControl.Resources>
+		<Style TargetType="{x:Type local:CircleScale}">
+			<Setter Property="Radius" Value="300"/>
+			<Setter Property="StartAngle" Value="-30"/>
+			<Setter Property="EndAngle" Value="210"/>
+			<Setter Property="StartValue" Value="0"/>
+			<Setter Property="EndValue" Value="160"/>
+			<Setter Property="Foreground" Value="Black"/>
+		</Style>
+	</UserControl.Resources>
+	
+	<Grid Background="AntiqueWhite">
+		<local:CircleScale MarkStep="2" MarkHeight="4" MarkWidth="10" Padding="20"/>
+		<local:CircleScale MarkStep="10" MarkHeight="4" MarkWidth="30"/>
+		<local:CircleScale MarkStep="20" MarkHeight="8" MarkWidth="30"/>
+	</Grid>
+</UserControl>
