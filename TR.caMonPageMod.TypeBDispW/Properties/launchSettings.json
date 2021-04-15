@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "TR.caMonPageMod.TypeBDispW": {
+      "commandName": "Executable",
+      "executablePath": "D:\\caMon\\caMon.exe",
+      "commandLineArgs": "$(TargetFileName)",
+    }
+  }
+}
