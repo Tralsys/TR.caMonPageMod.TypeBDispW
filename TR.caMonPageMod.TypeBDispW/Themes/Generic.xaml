@@ -16,6 +16,7 @@
 		<local:DoubleToThicknessConverter/>
 		<local:TakeSelectedSideThicknessConverter SideSelect="Right"/>
 	</local:ValueConverterGroup>
+	<local:DoubleToIntConverter x:Key="DoubleToIntConv"/>
 
 	<Style TargetType="{x:Type local:CircleScale}">
 		<Setter Property="Template">
@@ -73,6 +74,23 @@
 						<Grid.RenderTransform>
 							<RotateTransform x:Name="NeedleRotater"/>
 						</Grid.RenderTransform>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type local:CircleMeter}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:CircleMeter}">
+					<Grid>
+						<local:CircleScale Style="{TemplateBinding MarkSStyle}"
+															 Radius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Radius}"/>
+						<local:CircleScale Style="{TemplateBinding MarkMStyle}"
+															 MarkStep="{TemplateBinding MarkMStep}"/>
+						<local:CircleScale Style="{TemplateBinding MarkLStyle}" MarkStep="{TemplateBinding MarkLStep}"/>
+						<local:Needle Style="{TemplateBinding NeedleStyle}" BitmapEffect="{TemplateBinding NeedleBitmapEffect}"/>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
