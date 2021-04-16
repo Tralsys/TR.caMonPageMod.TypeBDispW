@@ -55,6 +55,14 @@ namespace TR.caMonPageMod.TypeBDispW
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => ((Thickness)value).Left;
 	}
 
+	[ValueConversion(typeof(double), typeof(int))]
+	public class DoubleToIntConverter : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => Math.Floor((double)value);
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => (double)value;
+	}
+
 	//ref : https://oita.oika.me/2018/04/15/pilevalueconverter/
 	[ContentProperty(nameof(Converters))]
 	public class ValueConverterGroup : IValueConverter
