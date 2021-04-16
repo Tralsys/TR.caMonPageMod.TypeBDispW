@@ -1,10 +1,21 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TR.caMonPageMod.TypeBDispW
 {
-	public class Needle : Control
+	public interface INeedleProperties
+	{
+		Brush Foreground { get; }
+		double Radius { get; }
+		double NeedleHeight { get; }
+		double TriangleWidth { get; }
+		double WeightRectangleWidth { get; }
+		double CenterCircleRadius { get; }
+	}
+
+	public class Needle : Control, INeedleProperties
 	{
 		//<-(Padding)-><--------    (ActualRadius)   --------> *(Center)
 		//<-(Padding)-><-(TriangleWidth)-><-(RectangleWidth)-> *(Center) <-(WeightRectangleWidth)->
