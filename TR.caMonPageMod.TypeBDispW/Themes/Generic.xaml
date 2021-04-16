@@ -4,6 +4,8 @@
 		xmlns:local="clr-namespace:TR.caMonPageMod.TypeBDispW">
 
 	<local:ValueMultiplConverter x:Key="X2Conv" MultiplValue="2"/>
+	<local:ValueMultiplConverter x:Key="X0p5Conv" MultiplValue="0.5"/>
+	<local:ValueMultiplConverter x:Key="X1p01Conv" MultiplValue="1.01"/>
 	<local:ValueMultiplConverter x:Key="X1p001Conv" MultiplValue="1.001"/>
 	<local:TakeSelectedSideThicknessConverter x:Key="ThicknessSelectLeftConv" SideSelect="Left"/>
 	<local:ValueConverterGroup x:Key="DoubleToThicknessLeftConv">
@@ -33,22 +35,30 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:Needle}">
-					<Grid>
-						<Path Data="M 0,1 L 1000,0 L 1001,0 L 1001,2 L 1000,2 Z"
-									Margin="{Binding Padding, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ThicknessSelectLeftConv}}"
-									HorizontalAlignment="Left"
-									VerticalAlignment="Center"
-									Stretch="Fill"
-									StrokeThickness="0"
-									Fill="{TemplateBinding Foreground}"
-									Width="{Binding TriangleWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource X1p001Conv}}"
-									Height="{TemplateBinding NeedleHeight}"/>
-						<Rectangle Fill="{TemplateBinding Foreground}"
-											 Margin="{Binding WeightRectangleWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource DoubleToThicknessRightConv}}"
-											 HorizontalAlignment="Right"
-											 VerticalAlignment="Center"
-											 Width="{TemplateBinding RectangleWidth}"
-											 Height="{TemplateBinding NeedleHeight}"/>
+					<Grid x:Name="Needle_Base"
+								Background="{x:Null}"
+								Height="{Binding Radius, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource X2Conv}}"
+								Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+								RenderTransformOrigin="0.5,0.5"
+								Margin="{TemplateBinding Margin}">
+						<Grid Margin="{TemplateBinding Padding}">
+							<Path Data="M 0,1 L 100,0 L 101,0 L 101,2 L 100,2 Z"
+										Margin="0"
+										HorizontalAlignment="Left"
+										VerticalAlignment="Center"
+										Stretch="Fill"
+										StrokeThickness="0"
+										Fill="{TemplateBinding Foreground}"
+										Width="{Binding TriangleWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource X1p01Conv}}"
+										Height="{TemplateBinding NeedleHeight}"/>
+							<Rectangle Fill="{TemplateBinding Foreground}"
+												 Margin="{Binding TriangleWidth, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource DoubleToThicknessLeftConv}}"
+												 HorizontalAlignment="Left"
+												 VerticalAlignment="Center"
+												 Width="{TemplateBinding RectangleWidth}"
+												 Height="{TemplateBinding NeedleHeight}"/>
+						</Grid>
+
 						<Rectangle Fill="{TemplateBinding Foreground}"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Center"
@@ -56,13 +66,13 @@
 											 Height="{TemplateBinding NeedleHeight}"
 											 Width="{TemplateBinding WeightRectangleWidth}"/>
 						<Ellipse VerticalAlignment="Center"
-										 HorizontalAlignment="Left"
+										 HorizontalAlignment="Center"
 										 Fill="{TemplateBinding Foreground}"
-										 Margin="{TemplateBinding CenterCircleMargin}"
-									Height="{Binding CenterCircleRadius, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource X2Conv}}"
-									Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}">
-						</Ellipse>
-
+									Height="{Binding CenterCircleRadius, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource X2Conv}}"
+									Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"/>
+						<Grid.RenderTransform>
+							<RotateTransform x:Name="NeedleRotater"/>
+						</Grid.RenderTransform>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
