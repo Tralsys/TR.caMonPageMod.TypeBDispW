@@ -8,7 +8,21 @@ using System.Windows.Shapes;
 
 namespace TR.caMonPageMod.TypeBDispW
 {
-	public class CircleScale : Control
+	public interface ICircleScaleProperties
+	{
+		Brush Foreground { get; }
+		double StartAngle { get; }
+		double EndAngle { get; }
+		double Radius { get; }
+		int StartValue { get; }
+		int EndValue { get; }
+		int MarkStep { get; }
+		double MarkHeight { get; }
+		double MarkWidth { get; }
+		Func<int, bool> ExecludeWhenTrue { get; }
+	}
+
+	public class CircleScale : Control, ICircleScaleProperties
 	{
 		/// <summary>目盛の開始角度</summary>
 		public double StartAngle { get => (double)GetValue(StartAngleProperty); set => SetValue(StartAngleProperty, value); }
