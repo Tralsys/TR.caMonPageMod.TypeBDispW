@@ -25,7 +25,7 @@
 									Background="{x:Null}"
 									Height="{Binding Radius, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource X2Conv}}"
 									Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
-									Margin="{TemplateBinding Margin}"/>
+									Margin="0"/>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
