@@ -40,11 +40,11 @@ namespace TR.caMonPageMod.TypeBDispW
 		/// <summary>針のおもり部分の幅の依存関係プロパティ</summary>
 		static public readonly DependencyProperty WeightRectangleWidthProperty = DependencyProperty.Register(nameof(WeightRectangleWidth), typeof(double), typeof(Needle));
 
-		public double RectangleWidth { get => (double)GetValue(RectangleWidthProperty); set => SetValue(RectangleWidthPropertyKey, value); }
+		public double RectangleWidth { get => (double)GetValue(RectangleWidthProperty); private set => SetValue(RectangleWidthPropertyKey, value); }
 		static private readonly DependencyPropertyKey RectangleWidthPropertyKey = DependencyProperty.RegisterReadOnly(nameof(RectangleWidth), typeof(double), typeof(Needle), new());
 		static public readonly DependencyProperty RectangleWidthProperty = RectangleWidthPropertyKey.DependencyProperty;
 
-		public Thickness CenterCircleMargin { get => (Thickness)GetValue(CenterCircleMarginProperty); set => SetValue(CenterCircleMarginPropertyKey, value); }
+		public Thickness CenterCircleMargin { get => (Thickness)GetValue(CenterCircleMarginProperty); private set => SetValue(CenterCircleMarginPropertyKey, value); }
 		static private readonly DependencyPropertyKey CenterCircleMarginPropertyKey = DependencyProperty.RegisterReadOnly(nameof(CenterCircleMargin), typeof(Thickness), typeof(Needle), new());
 		static public readonly DependencyProperty CenterCircleMarginProperty = CenterCircleMarginPropertyKey.DependencyProperty;
 
