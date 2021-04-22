@@ -87,4 +87,30 @@ namespace TR.caMonPageMod.TypeBDispW
 			return value;
 		}
 	}
+
+	[ValueConversion(typeof(object), typeof(double))]
+	public class ObjectToStringConverter : IValueConverter
+	{
+		public virtual object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> value.ToString();
+
+		public virtual object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> throw new NotImplementedException();
+	}
+
+	[ValueConversion(typeof(double), typeof(string))]
+	public class DoubleToStringConverter : ObjectToStringConverter
+	{
+		public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> double.TryParse(value as string, out double val) ? val : base.ConvertBack(value, targetType, parameter, culture);
+	}
+
+	[ValueConversion(typeof(double), typeof(double))]
+	public class DoubleSignInvertConverter : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> -(double)value;
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> -(double)value;
+	}
 }
