@@ -4,23 +4,75 @@
 						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 						 xmlns:local="clr-namespace:TR.caMonPageMod.TypeBDispW"
+						 d:DataContext="{d:DesignInstance Type=local:PageTR01DataClass}"
 						 mc:Ignorable="d" 
-						 Height="800" Width="1280">
+						 Height="1200" Width="1920">
 	
 	<UserControl.Resources>
+		<SolidColorBrush x:Key="MeterBGColor" Color="#122"/>
+
 		<Style TargetType="{x:Type local:CircleScale}">
-			<Setter Property="Radius" Value="300"/>
-			<Setter Property="StartAngle" Value="-30"/>
-			<Setter Property="EndAngle" Value="210"/>
-			<Setter Property="StartValue" Value="0"/>
-			<Setter Property="EndValue" Value="160"/>
-			<Setter Property="Foreground" Value="Black"/>
+			<Setter Property="Foreground" Value="LimeGreen"/>
 		</Style>
+
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkS" BasedOn="{StaticResource {x:Type local:CircleScale}}">
+			<Setter Property="MarkHeight" Value="4"/>
+			<Setter Property="MarkWidth" Value="20"/>
+			<Setter Property="Padding" Value="20"/>
+		</Style>
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkM" BasedOn="{StaticResource {x:Type local:CircleScale}}">
+			<Setter Property="MarkHeight" Value="4"/>
+			<Setter Property="MarkWidth" Value="40"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkL" BasedOn="{StaticResource {x:Type local:CircleScale}}">
+			<Setter Property="MarkHeight" Value="8"/>
+			<Setter Property="MarkWidth" Value="40"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		
+		<Style TargetType="{x:Type local:Needle}">
+			<Setter Property="TriangleWidth" Value="30"/>
+			<Setter Property="NeedleHeight" Value="20"/>
+			<Setter Property="WeightRectangleWidth" Value="60"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="CenterCircleRadius" Value="18"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="Margin" Value="40"/>
+			<Setter Property="Padding" Value="30"/>
+		</Style>
+
+		<DropShadowBitmapEffect x:Key="DropShadow" />
+
+		<!--TO DESIGN-->
+		<local:CircleMeterSettings
+			x:Key="SPD160"
+			Radius="300"
+			StartAngle="-30"
+			EndAngle="210"
+			StartValue="0"
+			EndValue="160"
+			MarkLStep="20"
+			MarkMStep="10"
+			MarkSStep="2"/>
 	</UserControl.Resources>
 	
-	<Grid Background="AntiqueWhite">
-		<local:CircleScale MarkStep="2" MarkHeight="4" MarkWidth="10" Padding="20"/>
-		<local:CircleScale MarkStep="10" MarkHeight="4" MarkWidth="30"/>
-		<local:CircleScale MarkStep="20" MarkHeight="8" MarkWidth="30"/>
+	<Grid>
+		<Image Source="/TR.caMonPageMod.TypeBDispW;component/TR01Web.png"/>
+		<Rectangle Fill="Black" Opacity="0.6"/>
+
+		<Grid Margin="120,140"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Bottom">
+			<Ellipse Margin="0"
+							 Fill="{StaticResource MeterBGColor}"/>
+			<local:CircleMeter MarkSStyle="{StaticResource Style_MarkS}"
+												 MarkMStyle="{StaticResource Style_MarkM}"
+												 MarkLStyle="{StaticResource Style_MarkL}"
+												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 MeterSettings="{StaticResource SPD160}"/>
+		</Grid>
 	</Grid>
 </UserControl>
