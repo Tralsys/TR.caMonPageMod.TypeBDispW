@@ -17,6 +17,8 @@
 		<local:TakeSelectedSideThicknessConverter SideSelect="Right"/>
 	</local:ValueConverterGroup>
 	<local:DoubleToIntConverter x:Key="DoubleToIntConv"/>
+	<local:DoubleToStringConverter x:Key="DoubleToStringConv"/>
+	<local:DoubleSignInvertConverter x:Key="DoubleSignInvertConv"/>
 
 	<Style TargetType="{x:Type local:CircleScale}">
 		<Setter Property="Template">
@@ -84,14 +86,84 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:CircleMeter}">
-					<Grid>
-						<local:CircleScale Style="{TemplateBinding MarkSStyle}"
-															 Radius="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Radius}"/>
-						<local:CircleScale Style="{TemplateBinding MarkMStyle}"
-															 MarkStep="{TemplateBinding MarkMStep}"/>
-						<local:CircleScale Style="{TemplateBinding MarkLStyle}" MarkStep="{TemplateBinding MarkLStep}"/>
-						<local:Needle Style="{TemplateBinding NeedleStyle}" BitmapEffect="{TemplateBinding NeedleBitmapEffect}"/>
+					<Grid Margin="0">
+						<local:CircleScale Margin="0"
+															 Style="{TemplateBinding MarkSStyle}"
+															 Visibility="{Binding MeterSettings.MarkSVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 MarkStep="{Binding MeterSettings.MarkSStep, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+						<local:CircleScale Margin="0"
+															 Style="{TemplateBinding MarkMStyle}"
+															 Visibility="{Binding MeterSettings.MarkMVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 MarkStep="{Binding MeterSettings.MarkMStep, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+						<local:CircleScale Margin="0"
+															 Style="{TemplateBinding MarkLStyle}"
+															 Visibility="{Binding MeterSettings.MarkLVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 MarkStep="{Binding MeterSettings.MarkLStep, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+
+						<local:Needle Margin="0"
+													Style="{TemplateBinding NeedleStyle}"
+													Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													BitmapEffect="{TemplateBinding NeedleBitmapEffect}"/>
 					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type local:CircleMeterValueText}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:CircleMeterValueText}">
+					<Grid Background="{x:Null}"
+								Height="{Binding Radius, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource X2Conv}}"
+								Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+								RenderTransformOrigin="0.5,0.5"
+								Margin="0">
+						<TextBlock Text="{TemplateBinding TextValue, Converter={StaticResource DoubleToStringConv}}"
+											 Margin="{TemplateBinding Padding, Converter={StaticResource ThicknessSelectLeftConv}}"
+											 RenderTransformOrigin="0.5,0.5"
+											 HorizontalAlignment="Left"
+											 VerticalAlignment="Center">
+							<TextBlock.RenderTransform>
+								<RotateTransform Angle="{TemplateBinding Angle, Converter={StaticResource DoubleSignInvertConv}}"/>
+							</TextBlock.RenderTransform>
+						</TextBlock>
+						<Grid.RenderTransform>
+							<RotateTransform Angle="{TemplateBinding Angle}"/>
+						</Grid.RenderTransform>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type local:CircleMeterValueTextGroup}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type local:CircleMeterValueTextGroup}">
+					<Border Background="{TemplateBinding Background}"
+									BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}">
+					</Border>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
