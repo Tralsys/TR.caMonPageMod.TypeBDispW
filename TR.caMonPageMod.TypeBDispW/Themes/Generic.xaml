@@ -93,7 +93,7 @@
 															 Style="{TemplateBinding MarkSStyle}"
 															 Visibility="{Binding MeterSettings.MarkSVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 MarkStep="{Binding MeterSettings.MarkSStep, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-															 Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 Radius="{TemplateBinding Radius}"
 															 StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -102,7 +102,7 @@
 															 Style="{TemplateBinding MarkMStyle}"
 															 Visibility="{Binding MeterSettings.MarkMVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 MarkStep="{Binding MeterSettings.MarkMStep, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-															 Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 Radius="{TemplateBinding Radius}"
 															 StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -111,16 +111,26 @@
 															 Style="{TemplateBinding MarkLStyle}"
 															 Visibility="{Binding MeterSettings.MarkLVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 MarkStep="{Binding MeterSettings.MarkLStep, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-															 Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+															 Radius="{TemplateBinding Radius}"
 															 StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 															 EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
 
+						<local:CircleMeterValueTextGroup Margin="0"
+																						 Visibility="{Binding MeterSettings.TextVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+																						 Step="{Binding MeterSettings.TextStep, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+																						 TextStyle="{TemplateBinding TextStyle}"
+																						 Radius="{TemplateBinding Radius}"
+																						 StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+																						 EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+																						 StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+																						 EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+
 						<local:Needle Margin="0"
 													CurrentValue="{TemplateBinding CurrentValue}"
 													Style="{TemplateBinding NeedleStyle}"
-													Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													Radius="{TemplateBinding Radius}"
 													StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 													EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 													StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -129,7 +139,7 @@
 						<local:Needle Margin="0"
 													CurrentValue="{TemplateBinding CurrentValue2}"
 													Style="{TemplateBinding Needle2Style}"
-													Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													Radius="{TemplateBinding Radius}"
 													StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 													EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 													StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -152,17 +162,18 @@
 								Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
 								RenderTransformOrigin="0.5,0.5"
 								Margin="0">
-						<TextBlock Text="{TemplateBinding TextValue, Converter={StaticResource DoubleToStringConv}}"
+						<TextBlock Style="{TemplateBinding TextStyle}"
+											 Text="{TemplateBinding TextValue, Converter={StaticResource DoubleToStringConv}}"
 											 Margin="{TemplateBinding Padding, Converter={StaticResource ThicknessSelectLeftConv}}"
 											 RenderTransformOrigin="0.5,0.5"
 											 HorizontalAlignment="Left"
 											 VerticalAlignment="Center">
 							<TextBlock.RenderTransform>
-								<RotateTransform Angle="{TemplateBinding Angle, Converter={StaticResource DoubleSignInvertConv}}"/>
+								<RotateTransform Angle="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Angle, Converter={StaticResource DoubleSignInvertConv}}"/>
 							</TextBlock.RenderTransform>
 						</TextBlock>
 						<Grid.RenderTransform>
-							<RotateTransform Angle="{TemplateBinding Angle}"/>
+							<RotateTransform Angle="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Angle}"/>
 						</Grid.RenderTransform>
 					</Grid>
 				</ControlTemplate>
@@ -174,10 +185,11 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:CircleMeterValueTextGroup}">
-					<Border Background="{TemplateBinding Background}"
-									BorderBrush="{TemplateBinding BorderBrush}"
-									BorderThickness="{TemplateBinding BorderThickness}">
-					</Border>
+					<Grid x:Name="BaseGrid"
+									Background="{x:Null}"
+									Height="{Binding Radius, RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource X2Conv}}"
+									Width="{Binding Height, RelativeSource={RelativeSource Mode=Self}}"
+									Margin="0"/>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>

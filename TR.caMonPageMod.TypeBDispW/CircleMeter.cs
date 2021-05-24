@@ -57,6 +57,9 @@ namespace TR.caMonPageMod.TypeBDispW
 		public double MarkSStep { get => _MarkSStep; set { _MarkSStep = value; OnPropertyChanged(nameof(MarkSStep)); } }
 		private double _MarkSStep = 0;
 
+		public double TextStep { get => _TextStep; set { _TextStep = value; OnPropertyChanged(nameof(TextStep)); } }
+		private double _TextStep = 0;
+
 		public Visibility MarkLVisibility { get => _MarkLVisibility; set { _MarkLVisibility = value; OnPropertyChanged(nameof(MarkLVisibility)); } }
 		private Visibility _MarkLVisibility = Visibility.Visible;
 
@@ -66,7 +69,8 @@ namespace TR.caMonPageMod.TypeBDispW
 		public Visibility MarkSVisibility { get => _MarkSVisibility; set { _MarkSVisibility = value; OnPropertyChanged(nameof(MarkSVisibility)); } }
 		private Visibility _MarkSVisibility = Visibility.Visible;
 
-
+		public Visibility TextVisibility { get => _TextVisibility; set { _TextVisibility = value; OnPropertyChanged(nameof(TextVisibility)); } }
+		private Visibility _TextVisibility = Visibility.Visible;
 	}
 	public class CircleMeter : Control
 	{
@@ -88,6 +92,8 @@ namespace TR.caMonPageMod.TypeBDispW
 		static public readonly DependencyProperty Needle2StyleProperty = DependencyProperty.Register(nameof(Needle2Style), typeof(Style), typeof(CircleMeter));
 		public Style CenterPinStyle { get => (Style)GetValue(CenterPinStyleProperty); set => SetValue(CenterPinStyleProperty, value); }
 		static public readonly DependencyProperty CenterPinStyleProperty = DependencyProperty.Register(nameof(CenterPinStyle), typeof(Style), typeof(CircleMeter));
+		public Style TextStyle { get => (Style)GetValue(TextStyleProperty); set => SetValue(TextStyleProperty, value); }
+		static public readonly DependencyProperty TextStyleProperty = DependencyProperty.Register(nameof(TextStyle), typeof(Style), typeof(CircleMeter));
 
 		public double CurrentValue { get => (double)GetValue(CurrentValueProperty); set => SetValue(CurrentValueProperty, value); }
 		static public readonly DependencyProperty CurrentValueProperty = DependencyProperty.Register(nameof(CurrentValue), typeof(double), typeof(CircleMeter));

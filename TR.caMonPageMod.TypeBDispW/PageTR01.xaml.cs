@@ -19,11 +19,11 @@ namespace TR.caMonPageMod.TypeBDispW
 				90,
 				new()
 				{
-					Radius = 300,
 					StartAngle = -180.0 / 7.0,
 					EndAngle = 180 + (180.0 / 7.0),
 					StartValue = 0,
 					EndValue = 90,
+					TextStep = 20,
 					MarkLStep = 20,
 					MarkMStep = 10,
 					MarkSStep = 2,
@@ -36,11 +36,11 @@ namespace TR.caMonPageMod.TypeBDispW
 				120,
 				new()
 				{
-					Radius = 300,
 					StartAngle = -30,
 					EndAngle = 210,
 					StartValue = 0,
 					EndValue = 120,
+					TextStep = 20,
 					MarkLStep = 20,
 					MarkMStep = 10,
 					MarkSStep = 2,
@@ -53,11 +53,11 @@ namespace TR.caMonPageMod.TypeBDispW
 				140,
 				new()
 				{
-					Radius = 300,
 					StartAngle = -36,
 					EndAngle = 216,
 					StartValue = 0,
 					EndValue = 140,
+					TextStep = 20,
 					MarkLStep = 10,
 					MarkMStep = 5,
 					MarkSStep = 1,
@@ -70,11 +70,11 @@ namespace TR.caMonPageMod.TypeBDispW
 				160,
 				new()
 				{
-					Radius = 300,
 					StartAngle = -30,
 					EndAngle = 210,
 					StartValue = 0,
 					EndValue = 160,
+					TextStep = 20,
 					MarkLStep = 20,
 					MarkMStep = 10,
 					MarkSStep = 2,
@@ -90,7 +90,7 @@ namespace TR.caMonPageMod.TypeBDispW
 			DataContext = MyData;
 
 			InitializeComponent();
-			MyData.SpeedMeterSetting = SPDMeterSettings.GetValueOrDefault(90);
+			MyData.SpeedMeterSetting = SPDMeterSettings.GetValueOrDefault(160);
 			Background = Brushes.AntiqueWhite;
 		}
 	}

@@ -57,17 +57,40 @@
 			<Setter Property="Width" Value="6"/>
 			<Setter Property="Fill" Value="Silver"/>
 		</Style>
-		
+
 		<DropShadowBitmapEffect x:Key="DropShadow" />
+
+		<Style TargetType="TextBlock" x:Key="ConstantTextStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+			<Setter Property="Foreground" Value="LimeGreen"/>
+			<Setter Property="FontSize" Value="40"/>
+		</Style>
+		<Style TargetType="TextBlock" x:Key="MeterTextStyle" BasedOn="{StaticResource ConstantTextStyle}">
+			<Setter Property="Padding" Value="45"/>
+		</Style>
+		<Style TargetType="TextBlock" x:Key="MeterTextStyle_Speed" BasedOn="{StaticResource MeterTextStyle}">
+			<Setter Property="FontStyle" Value="Italic"/>
+		</Style>
+		
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontSize" Value="40"/>
+		</Style>
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_Speed" BasedOn="{StaticResource VariableTextStyle}">
+			<Setter Property="FontSize" Value="100"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontStyle" Value="Italic"/>
+			<Setter Property="BitmapEffect" Value="{StaticResource DropShadow}"/>
+			<Setter Property="Padding" Value="10,0"/>
+		</Style>
 
 		<!--TO DESIGN-->
 		<local:CircleMeterSettings
 			x:Key="PresMeter"
-			Radius="240"
 			StartAngle="-40"
 			EndAngle="220"
 			StartValue="0"
 			EndValue="1000"
+			TextStep="200"
 			MarkLStep="100"
 			MarkMStep="5"
 			MarkMVisibility="Collapsed"
@@ -80,42 +103,102 @@
 
 
 		<!--MR/ER Meter-->
-		<local:CircleMeter Margin="64,144"
-											 HorizontalAlignment="Left"
-											 VerticalAlignment="Bottom"
-											 Background="{StaticResource MeterBGColor}"
-											 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
-											 MarkSStyle="{StaticResource Style_MarkS_Pres}"
-											 MarkLStyle="{StaticResource Style_MarkL}"
-											 NeedleStyle="{StaticResource {x:Type local:Needle}}"
-											 Needle2Style="{StaticResource Style_RedNeedle}"
-											 NeedleBitmapEffect="{StaticResource DropShadow}"
-											 MeterSettings="{StaticResource PresMeter}"/>
+		<Grid Margin="64,144"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Bottom">
+			<local:CircleMeter Radius="240"
+												 Background="{StaticResource MeterBGColor}"
+												 TextStyle="{StaticResource MeterTextStyle}"
+												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+												 MarkSStyle="{StaticResource Style_MarkS_Pres}"
+												 MarkLStyle="{StaticResource Style_MarkL}"
+												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+												 Needle2Style="{StaticResource Style_RedNeedle}"
+												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 MeterSettings="{StaticResource PresMeter}"/>
+
+			<StackPanel Margin="16"
+									Orientation="Horizontal"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Bottom">
+				<TextBlock Text="MR"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="Red"/>
+				<TextBlock Text="/ER"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="White"/>
+			</StackPanel>
+			
+			<TextBlock Text="kPa"
+								 Style="{StaticResource ConstantTextStyle}"
+								 VerticalAlignment="Bottom"
+								 HorizontalAlignment="Right"
+								 Margin="90,55"/>
+		</Grid>
 
 		<!--BC/BP Meter-->
-		<local:CircleMeter Margin="600,144"
-											 HorizontalAlignment="Left"
-											 VerticalAlignment="Bottom"
-											 Background="{StaticResource MeterBGColor}"
-											 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
-											 MarkSStyle="{StaticResource Style_MarkS_Pres}"
-											 MarkLStyle="{StaticResource Style_MarkL}"
-											 NeedleStyle="{StaticResource {x:Type local:Needle}}"
-											 Needle2Style="{StaticResource Style_RedNeedle}"
-											 NeedleBitmapEffect="{StaticResource DropShadow}"
-											 MeterSettings="{StaticResource PresMeter}"/>
+		<Grid Margin="600,144"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Bottom">
+			<local:CircleMeter Radius="240"
+												 Background="{StaticResource MeterBGColor}"
+												 TextStyle="{StaticResource MeterTextStyle}"
+												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+												 MarkSStyle="{StaticResource Style_MarkS_Pres}"
+												 MarkLStyle="{StaticResource Style_MarkL}"
+												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+												 Needle2Style="{StaticResource Style_RedNeedle}"
+												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 MeterSettings="{StaticResource PresMeter}"/>
+
+			<StackPanel Margin="16"
+									Orientation="Horizontal"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Bottom">
+				<TextBlock Text="BC"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="Red"/>
+				<TextBlock Text="/BP"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="White"/>
+			</StackPanel>
+
+			<TextBlock Text="kPa"
+								 Style="{StaticResource ConstantTextStyle}"
+								 VerticalAlignment="Bottom"
+								 HorizontalAlignment="Right"
+								 Margin="90,55"/>
+		</Grid>
 
 		<!--Speed Meter-->
-		<local:CircleMeter Margin="120,140"
-											 HorizontalAlignment="Right"
-											 VerticalAlignment="Bottom"
-											 Background="{StaticResource MeterBGColor}"
-											 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
-											 MarkSStyle="{StaticResource Style_MarkS}"
-											 MarkMStyle="{StaticResource Style_MarkM}"
-											 MarkLStyle="{StaticResource Style_MarkL}"
-											 NeedleStyle="{StaticResource {x:Type local:Needle}}"
-											 NeedleBitmapEffect="{StaticResource DropShadow}"
-											 MeterSettings="{Binding SpeedMeterSetting}"/>
+		<Grid Margin="120,140"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Bottom">
+			<local:CircleMeter Radius="300"
+												 Background="{StaticResource MeterBGColor}"
+												 TextStyle="{StaticResource MeterTextStyle}"
+												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+												 MarkSStyle="{StaticResource Style_MarkS}"
+												 MarkMStyle="{StaticResource Style_MarkM}"
+												 MarkLStyle="{StaticResource Style_MarkL}"
+												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 MeterSettings="{Binding SpeedMeterSetting}"/>
+
+			<StackPanel Margin="130,55"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Bottom"
+									Orientation="Horizontal">
+				<TextBlock Text="120"
+									 Style="{StaticResource VariableTextStyle_Speed}"/>
+
+				<TextBlock Text="km/h"
+									 Style="{StaticResource ConstantTextStyle}"
+									 VerticalAlignment="Bottom"/>
+
+			</StackPanel>
+		</Grid>
+		
+		
 	</Grid>
 </UserControl>
