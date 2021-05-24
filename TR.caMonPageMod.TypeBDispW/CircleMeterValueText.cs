@@ -20,6 +20,9 @@ namespace TR.caMonPageMod.TypeBDispW
 		public int EndValue { get => (int)GetValue(EndValueProperty); set => SetValue(EndValueProperty, value); }
 		static public readonly DependencyProperty EndValueProperty = DependencyProperty.Register(nameof(EndValue), typeof(int), typeof(CircleMeterValueText), new(PositionPropertyChanged));
 
+		public Style TextStyle { get => (Style)GetValue(TextStyleProperty); set => SetValue(TextStyleProperty, value); }
+		static public readonly DependencyProperty TextStyleProperty = DependencyProperty.Register(nameof(TextStyle), typeof(Style), typeof(CircleMeterValueText));
+
 		public double TextValue { get => (double)GetValue(TextValueProperty); set => SetValue(TextValueProperty, value); }
 		static public readonly DependencyProperty TextValueProperty = DependencyProperty.Register(nameof(TextValue), typeof(double), typeof(CircleMeterValueText), new(PositionPropertyChanged));
 		public double Angle { get => (double)GetValue(AngleProperty); private set => SetValue(AnglePropertyKey, value); }
