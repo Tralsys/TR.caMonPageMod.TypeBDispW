@@ -116,6 +116,7 @@
 															 EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
 
 						<local:Needle Margin="0"
+													CurrentValue="{TemplateBinding CurrentValue}"
 													Style="{TemplateBinding NeedleStyle}"
 													Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 													StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
