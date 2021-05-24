@@ -7,7 +7,6 @@ namespace TR.caMonPageMod.TypeBDispW
 {
 	public interface IReadOnlyCircleMeterSettings
 	{
-		double Radius { get; }
 		int StartValue { get; }
 		int EndValue { get; }
 		double StartAngle { get; }
@@ -21,7 +20,6 @@ namespace TR.caMonPageMod.TypeBDispW
 	}
 	public interface IWriteOnlyCircleMeterSettings
 	{
-		double Radius { set; }
 		int StartValue { set; }
 		int EndValue { set; }
 		double StartAngle { set; }
@@ -37,9 +35,6 @@ namespace TR.caMonPageMod.TypeBDispW
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		void OnPropertyChanged(in string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-		public double Radius { get => _Radius; set { _Radius = value; OnPropertyChanged(nameof(Radius)); } }
-		private double _Radius = 0;
 
 		public int StartValue { get => _StartValue; set { _StartValue = value; OnPropertyChanged(nameof(StartValue)); } }
 		private int _StartValue = 0;
@@ -77,6 +72,9 @@ namespace TR.caMonPageMod.TypeBDispW
 	{
 		public CircleMeterSettings MeterSettings { get => (CircleMeterSettings)GetValue(MeterSettingsProperty); set => SetValue(MeterSettingsProperty, value); }
 		static public readonly DependencyProperty MeterSettingsProperty = DependencyProperty.Register(nameof(MeterSettings), typeof(CircleMeterSettings), typeof(CircleMeter));
+
+		public double Radius { get => (double)GetValue(RadiusProperty); set => SetValue(RadiusProperty, value); }
+		static public readonly DependencyProperty RadiusProperty = DependencyProperty.Register(nameof(Radius), typeof(double), typeof(CircleMeter));
 
 		public Style MarkLStyle { get => (Style)GetValue(MarkLStyleProperty); set => SetValue(MarkLStyleProperty, value); }
 		static public readonly DependencyProperty MarkLStyleProperty = DependencyProperty.Register(nameof(MarkLStyle), typeof(Style), typeof(CircleMeter));
