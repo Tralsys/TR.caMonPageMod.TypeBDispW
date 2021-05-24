@@ -86,12 +86,20 @@ namespace TR.caMonPageMod.TypeBDispW
 		static public readonly DependencyProperty MarkSStyleProperty = DependencyProperty.Register(nameof(MarkSStyle), typeof(Style), typeof(CircleMeter));
 		public Style NeedleStyle { get => (Style)GetValue(NeedleStyleProperty); set => SetValue(NeedleStyleProperty, value); }
 		static public readonly DependencyProperty NeedleStyleProperty = DependencyProperty.Register(nameof(NeedleStyle), typeof(Style), typeof(CircleMeter));
+		public Style Needle2Style { get => (Style)GetValue(Needle2StyleProperty); set => SetValue(Needle2StyleProperty, value); }
+		static public readonly DependencyProperty Needle2StyleProperty = DependencyProperty.Register(nameof(Needle2Style), typeof(Style), typeof(CircleMeter));
+		public Style CenterPinStyle { get => (Style)GetValue(CenterPinStyleProperty); set => SetValue(CenterPinStyleProperty, value); }
+		static public readonly DependencyProperty CenterPinStyleProperty = DependencyProperty.Register(nameof(CenterPinStyle), typeof(Style), typeof(CircleMeter));
 
 		public double CurrentValue { get => (double)GetValue(CurrentValueProperty); set => SetValue(CurrentValueProperty, value); }
 		static public readonly DependencyProperty CurrentValueProperty = DependencyProperty.Register(nameof(CurrentValue), typeof(double), typeof(CircleMeter));
+		public double CurrentValue2 { get => (double)GetValue(CurrentValue2Property); set => SetValue(CurrentValue2Property, value); }
+		static public readonly DependencyProperty CurrentValue2Property = DependencyProperty.Register(nameof(CurrentValue2), typeof(double), typeof(CircleMeter));
 
 		public BitmapEffect NeedleBitmapEffect { get => (BitmapEffect)GetValue(NeedleBitmapEffectProperty); set => SetValue(NeedleBitmapEffectProperty, value); }
 		static public readonly DependencyProperty NeedleBitmapEffectProperty = DependencyProperty.Register(nameof(NeedleBitmapEffect), typeof(BitmapEffect), typeof(CircleMeter));
+		public BitmapEffect Needle2BitmapEffect { get => (BitmapEffect)GetValue(Needle2BitmapEffectProperty); set => SetValue(Needle2BitmapEffectProperty, value); }
+		static public readonly DependencyProperty Needle2BitmapEffectProperty = DependencyProperty.Register(nameof(Needle2BitmapEffect), typeof(BitmapEffect), typeof(CircleMeter));
 
 
 		static CircleMeter() => DefaultStyleKeyProperty.OverrideMetadata(typeof(CircleMeter), new FrameworkPropertyMetadata(typeof(CircleMeter)));

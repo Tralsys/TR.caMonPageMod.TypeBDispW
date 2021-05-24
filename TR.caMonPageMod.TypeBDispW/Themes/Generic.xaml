@@ -86,7 +86,9 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type local:CircleMeter}">
-					<Grid Margin="0">
+					<Grid Margin="0" Background="{x:Null}">
+						<Ellipse Fill="{TemplateBinding Background}" Margin="0"/>
+
 						<local:CircleScale Margin="0"
 															 Style="{TemplateBinding MarkSStyle}"
 															 Visibility="{Binding MeterSettings.MarkSVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -124,6 +126,17 @@
 													StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 													EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
 													BitmapEffect="{TemplateBinding NeedleBitmapEffect}"/>
+						<local:Needle Margin="0"
+													CurrentValue="{TemplateBinding CurrentValue2}"
+													Style="{TemplateBinding Needle2Style}"
+													Radius="{Binding MeterSettings.Radius, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													StartValue="{Binding MeterSettings.StartValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													EndValue="{Binding MeterSettings.EndValue, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													StartAngle="{Binding MeterSettings.StartAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													EndAngle="{Binding MeterSettings.EndAngle, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+													BitmapEffect="{TemplateBinding Needle2BitmapEffect}"/>
+
+						<Ellipse Style="{TemplateBinding CenterPinStyle}"/>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
