@@ -20,6 +20,9 @@
 			<Setter Property="MarkWidth" Value="20"/>
 			<Setter Property="Padding" Value="0"/>
 		</Style>
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkS_Pres" BasedOn="{StaticResource Style_MarkS}">
+			<Setter Property="Padding" Value="20"/>
+		</Style>
 		<Style TargetType="local:CircleScale" x:Key="Style_MarkM" BasedOn="{StaticResource {x:Type local:CircleScale}}">
 			<Setter Property="MarkHeight" Value="3"/>
 			<Setter Property="MarkWidth" Value="40"/>
@@ -43,36 +46,76 @@
 			<Setter Property="Padding" Value="30"/>
 		</Style>
 
+		<Style TargetType="{x:Type local:Needle}" BasedOn="{StaticResource {x:Type local:Needle}}" x:Key="Style_RedNeedle">
+			<Setter Property="NeedleHeight" Value="16"/>
+			<Setter Property="Foreground" Value="Red"/>
+			<Setter Property="CenterCircleRadius" Value="16"/>
+		</Style>
+
+		<Style TargetType="Ellipse" x:Key="MeterCenterPinStyle">
+			<Setter Property="Height" Value="6"/>
+			<Setter Property="Width" Value="6"/>
+			<Setter Property="Fill" Value="Silver"/>
+		</Style>
+		
 		<DropShadowBitmapEffect x:Key="DropShadow" />
 
 		<!--TO DESIGN-->
 		<local:CircleMeterSettings
-			x:Key="SPD160"
-			Radius="300"
-			StartAngle="-30"
-			EndAngle="210"
+			x:Key="PresMeter"
+			Radius="240"
+			StartAngle="-40"
+			EndAngle="220"
 			StartValue="0"
-			EndValue="160"
-			MarkLStep="20"
-			MarkMStep="10"
-			MarkSStep="2"/>
+			EndValue="1000"
+			MarkLStep="100"
+			MarkMStep="5"
+			MarkMVisibility="Collapsed"
+			MarkSStep="20"/>
 	</UserControl.Resources>
 	
 	<Grid>
 		<Image Source="/TR.caMonPageMod.TypeBDispW;component/TR01Web.png"/>
 		<Rectangle Fill="Black" Opacity="0.6"/>
 
-		<Grid Margin="120,140"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Bottom">
-			<Ellipse Margin="0"
-							 Fill="{StaticResource MeterBGColor}"/>
-			<local:CircleMeter MarkSStyle="{StaticResource Style_MarkS}"
-												 MarkMStyle="{StaticResource Style_MarkM}"
-												 MarkLStyle="{StaticResource Style_MarkL}"
-												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
-												 NeedleBitmapEffect="{StaticResource DropShadow}"
-												 MeterSettings="{StaticResource SPD160}"/>
-		</Grid>
+
+		<!--MR/ER Meter-->
+		<local:CircleMeter Margin="64,144"
+											 HorizontalAlignment="Left"
+											 VerticalAlignment="Bottom"
+											 Background="{StaticResource MeterBGColor}"
+											 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+											 MarkSStyle="{StaticResource Style_MarkS_Pres}"
+											 MarkLStyle="{StaticResource Style_MarkL}"
+											 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+											 Needle2Style="{StaticResource Style_RedNeedle}"
+											 NeedleBitmapEffect="{StaticResource DropShadow}"
+											 MeterSettings="{StaticResource PresMeter}"/>
+
+		<!--BC/BP Meter-->
+		<local:CircleMeter Margin="600,144"
+											 HorizontalAlignment="Left"
+											 VerticalAlignment="Bottom"
+											 Background="{StaticResource MeterBGColor}"
+											 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+											 MarkSStyle="{StaticResource Style_MarkS_Pres}"
+											 MarkLStyle="{StaticResource Style_MarkL}"
+											 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+											 Needle2Style="{StaticResource Style_RedNeedle}"
+											 NeedleBitmapEffect="{StaticResource DropShadow}"
+											 MeterSettings="{StaticResource PresMeter}"/>
+
+		<!--Speed Meter-->
+		<local:CircleMeter Margin="120,140"
+											 HorizontalAlignment="Right"
+											 VerticalAlignment="Bottom"
+											 Background="{StaticResource MeterBGColor}"
+											 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+											 MarkSStyle="{StaticResource Style_MarkS}"
+											 MarkMStyle="{StaticResource Style_MarkM}"
+											 MarkLStyle="{StaticResource Style_MarkL}"
+											 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+											 NeedleBitmapEffect="{StaticResource DropShadow}"
+											 MeterSettings="{Binding SpeedMeterSetting}"/>
 	</Grid>
 </UserControl>
