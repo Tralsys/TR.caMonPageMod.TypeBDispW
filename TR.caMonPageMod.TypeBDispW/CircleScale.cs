@@ -83,7 +83,6 @@ namespace TR.caMonPageMod.TypeBDispW
 		
 		public CircleScale()
 		{
-			DependencyPropertyDescriptor.FromProperty(PaddingProperty, typeof(CircleScale)).AddValueChanged(this, (_, _) => DrawRectangles());
 			Loaded += (_, _) =>
 			{
 				ScaleBaseGrid = Template.FindName(nameof(ScaleBaseGrid), this) as Grid;
