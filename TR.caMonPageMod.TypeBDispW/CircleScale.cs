@@ -95,6 +95,8 @@ namespace TR.caMonPageMod.TypeBDispW
 		{
 			if (!IsLoaded)
 				return;//初回Load時の負荷軽減のため
+			if (ScaleBaseGrid is null)
+				return; //nullなら以降の処理は実行できないため
 
 			Binding GetBinding(string name) => new(name) { Source = this };
 
