@@ -16,17 +16,17 @@
 		</Style>
 
 		<Style TargetType="local:CircleScale" x:Key="Style_MarkS" BasedOn="{StaticResource {x:Type local:CircleScale}}">
-			<Setter Property="MarkHeight" Value="4"/>
+			<Setter Property="MarkHeight" Value="3"/>
 			<Setter Property="MarkWidth" Value="20"/>
-			<Setter Property="Padding" Value="20"/>
+			<Setter Property="Padding" Value="0"/>
 		</Style>
 		<Style TargetType="local:CircleScale" x:Key="Style_MarkM" BasedOn="{StaticResource {x:Type local:CircleScale}}">
-			<Setter Property="MarkHeight" Value="4"/>
+			<Setter Property="MarkHeight" Value="3"/>
 			<Setter Property="MarkWidth" Value="40"/>
 			<Setter Property="Padding" Value="0"/>
 		</Style>
 		<Style TargetType="local:CircleScale" x:Key="Style_MarkL" BasedOn="{StaticResource {x:Type local:CircleScale}}">
-			<Setter Property="MarkHeight" Value="8"/>
+			<Setter Property="MarkHeight" Value="6"/>
 			<Setter Property="MarkWidth" Value="40"/>
 			<Setter Property="Padding" Value="0"/>
 		</Style>
