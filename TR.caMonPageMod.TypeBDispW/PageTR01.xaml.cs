@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -11,19 +12,77 @@ namespace TR.caMonPageMod.TypeBDispW
 	public partial class PageTR01 : UserControl
 	{
 		PageTR01DataClass MyData { get; } = new();
-		static CircleMeterSettings SPDMeter160 { get; } = new CircleMeterSettings()
+
+		static Dictionary<int, CircleMeterSettings> SPDMeterSettings { get; } = new()
 		{
-			Radius = 300,
-			StartAngle = -30,
-			EndAngle = 210,
-			StartValue = 0,
-			EndValue = 160,
-			MarkLStep = 20,
-			MarkMStep = 10,
-			MarkSStep = 2,
-			MarkLVisibility = Visibility.Visible,
-			MarkMVisibility = Visibility.Visible,
-			MarkSVisibility = Visibility.Visible,
+			{
+				90,
+				new()
+				{
+					Radius = 300,
+					StartAngle = -180.0 / 7.0,
+					EndAngle = 180 + (180.0 / 7.0),
+					StartValue = 0,
+					EndValue = 90,
+					MarkLStep = 20,
+					MarkMStep = 10,
+					MarkSStep = 2,
+					MarkLVisibility = Visibility.Visible,
+					MarkMVisibility = Visibility.Visible,
+					MarkSVisibility = Visibility.Visible,
+				}
+			},
+			{
+				120,
+				new()
+				{
+					Radius = 300,
+					StartAngle = -30,
+					EndAngle = 210,
+					StartValue = 0,
+					EndValue = 120,
+					MarkLStep = 20,
+					MarkMStep = 10,
+					MarkSStep = 2,
+					MarkLVisibility = Visibility.Visible,
+					MarkMVisibility = Visibility.Visible,
+					MarkSVisibility = Visibility.Visible,
+				}
+			},
+			{
+				140,
+				new()
+				{
+					Radius = 300,
+					StartAngle = -36,
+					EndAngle = 216,
+					StartValue = 0,
+					EndValue = 140,
+					MarkLStep = 10,
+					MarkMStep = 5,
+					MarkSStep = 1,
+					MarkLVisibility = Visibility.Visible,
+					MarkMVisibility = Visibility.Visible,
+					MarkSVisibility = Visibility.Visible,
+				}
+			},
+			{
+				160,
+				new()
+				{
+					Radius = 300,
+					StartAngle = -30,
+					EndAngle = 210,
+					StartValue = 0,
+					EndValue = 160,
+					MarkLStep = 20,
+					MarkMStep = 10,
+					MarkSStep = 2,
+					MarkLVisibility = Visibility.Visible,
+					MarkMVisibility = Visibility.Visible,
+					MarkSVisibility = Visibility.Visible,
+				}
+			}
 		};
 
 		public PageTR01()
@@ -31,7 +90,7 @@ namespace TR.caMonPageMod.TypeBDispW
 			DataContext = MyData;
 
 			InitializeComponent();
-			MyData.SpeedMeterSetting = SPDMeter160;
+			MyData.SpeedMeterSetting = SPDMeterSettings.GetValueOrDefault(90);
 			Background = Brushes.AntiqueWhite;
 		}
 	}
