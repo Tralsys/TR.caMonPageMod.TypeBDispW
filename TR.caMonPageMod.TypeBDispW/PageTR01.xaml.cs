@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using BIDSData_toBind;
+
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+
+using TR.BIDSSMemLib;
 
 namespace TR.caMonPageMod.TypeBDispW
 {
@@ -92,7 +97,12 @@ namespace TR.caMonPageMod.TypeBDispW
 			InitializeComponent();
 			MyData.SpeedMeterSetting = SPDMeterSettings.GetValueOrDefault(160);
 			Background = Brushes.AntiqueWhite;
+
+			Loaded += (s,e)=> SMemLib.SMC_BSMDChanged += SMemLib_SMC_BSMDChanged;
+			Unloaded+=(s,e)=> SMemLib.SMC_BSMDChanged -= SMemLib_SMC_BSMDChanged;
 		}
+
+		private void SMemLib_SMC_BSMDChanged(object sender, ValueChangedEventArgs<BIDSSharedMemoryData> e) => MyData.BSMD.BSMD = e.NewValue;
 	}
 
 	public class PageTR01DataClass : INotifyPropertyChanged
@@ -102,5 +112,7 @@ namespace TR.caMonPageMod.TypeBDispW
 
 		private CircleMeterSettings _SpeedMeterSetting = null;
 		public CircleMeterSettings SpeedMeterSetting { get => _SpeedMeterSetting; set { _SpeedMeterSetting = value; OnPropertyChanged(nameof(SpeedMeterSetting)); } }
+
+		public BSMD_toBind BSMD { get; } = new();
 	}
 }
