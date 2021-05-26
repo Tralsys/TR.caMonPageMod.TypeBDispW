@@ -9,6 +9,8 @@
 						 Height="1200" Width="1920">
 	
 	<UserControl.Resources>
+		<local:DoubleToIntConverter x:Key="DoubleToIntConv"/>
+
 		<SolidColorBrush x:Key="MeterBGColor" Color="#122"/>
 
 		<Style TargetType="{x:Type local:CircleScale}">
@@ -107,6 +109,8 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Bottom">
 			<local:CircleMeter Radius="240"
+												 CurrentValue="{Binding BSMD.ERPres}"
+												 CurrentValue2="{Binding BSMD.MRPres}"
 												 Background="{StaticResource MeterBGColor}"
 												 TextStyle="{StaticResource MeterTextStyle}"
 												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
@@ -141,6 +145,8 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Bottom">
 			<local:CircleMeter Radius="240"
+												 CurrentValue="{Binding BSMD.BPPres}"
+												 CurrentValue2="{Binding BSMD.BCPres}"
 												 Background="{StaticResource MeterBGColor}"
 												 TextStyle="{StaticResource MeterTextStyle}"
 												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
@@ -175,6 +181,7 @@
 					HorizontalAlignment="Right"
 					VerticalAlignment="Bottom">
 			<local:CircleMeter Radius="300"
+												 CurrentValue="{Binding BSMD.MySpeed}"
 												 Background="{StaticResource MeterBGColor}"
 												 TextStyle="{StaticResource MeterTextStyle}"
 												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
@@ -189,7 +196,7 @@
 									HorizontalAlignment="Right"
 									VerticalAlignment="Bottom"
 									Orientation="Horizontal">
-				<TextBlock Text="120"
+				<TextBlock Text="{Binding BSMD.MySpeed, Converter={StaticResource DoubleToIntConv}}"
 									 Style="{StaticResource VariableTextStyle_Speed}"/>
 
 				<TextBlock Text="km/h"
