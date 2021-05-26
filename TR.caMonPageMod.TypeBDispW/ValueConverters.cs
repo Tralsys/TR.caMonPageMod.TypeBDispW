@@ -113,4 +113,51 @@ namespace TR.caMonPageMod.TypeBDispW
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 			=> -(double)value;
 	}
+
+	[ValueConversion(typeof(int), typeof(object))]
+	public class IntValueEqualCheckConverter : IValueConverter
+	{
+		public bool IsSetReferenceValue { get; private set; } = false;
+		public int ReferenceValue { get => _ReferenceValue; set => (IsSetReferenceValue, _ReferenceValue) = (true, value); }
+		private int _ReferenceValue = 1;
+
+		public bool IsSetReturnWhenTRUE { get; private set; } = false;
+		public object ReturnWhenTRUE { get => _ReturnWhenTRUE; set => (IsSetReturnWhenTRUE, _ReturnWhenTRUE) = (true, value); }
+		private object _ReturnWhenTRUE = null;
+
+		public bool IsSetReturnWhenFALSE { get; private set; } = false;
+		public object ReturnWhenFALSE { get => _ReturnWhenFALSE; set => (IsSetReturnWhenFALSE, _ReturnWhenFALSE) = (true, value); }
+		private object _ReturnWhenFALSE = null;
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> TFChecker((int)value, parameter) ? ReturnWhenTRUEValue(parameter) : ReturnWhenFALSEValue(parameter);
+
+		private bool TFChecker(int value, object obj) =>
+				value ==
+					(IsSetReferenceValue//参照値が設定されてるか確認
+						? ReferenceValue//設定されてるなら, それを使用する
+						: (int)//そうでないなら, 以下の値をintにCastして使用する
+						(obj switch {
+							string s => int.Parse(s),
+							object[] objarr when objarr.Length >= 1 => objarr[0] is string s ? int.Parse(s):objarr[0],//objが配列, かつ1つ以上の要素を有しているなら, その先頭の要素(但し, stringならint化したもの)を使用
+							object => obj,//objがNULLでないならobjをそのまま使用する
+							_ => 1//既定値は1
+						})
+					);
+
+		private object ReturnWhenTRUEValue(object obj)
+			=> IsSetReturnWhenTRUE ? ReturnWhenTRUE //PropertyがSetされているなら, 無条件でそれを使用する
+				: obj is object[] objarr && objarr.Length >= 2 ? objarr[1] //引数が配列であり, かつ配列長が2以上ならそこから採用する
+				: null;//既定値はNULL
+		
+		private object ReturnWhenFALSEValue(object obj)
+			=> IsSetReturnWhenFALSE ? ReturnWhenFALSE //PropertyがSetされているなら, 無条件でそれを使用する
+				: obj is object[] objarr && objarr.Length >= 2 ? objarr[1] //引数が配列であり, かつ配列長が2以上ならそこから採用する
+				: null;//既定値はNULL
+		
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> throw new NotImplementedException();
+	}
+
 }
