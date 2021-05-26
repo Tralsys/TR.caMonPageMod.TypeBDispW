@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BIDSData_toBind" Version="1.0.0.1" />
     <PackageReference Include="caMon.IPages" Version="2.0.0" />
   </ItemGroup>
 
