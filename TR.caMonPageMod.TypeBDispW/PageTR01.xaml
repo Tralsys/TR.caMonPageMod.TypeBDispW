@@ -12,6 +12,13 @@
 		<local:DoubleToIntConverter x:Key="DoubleToIntConv"/>
 
 		<SolidColorBrush x:Key="MeterBGColor" Color="#122"/>
+		<SolidColorBrush x:Key="DirectionLampONColor" Color="LightYellow"/>
+		<SolidColorBrush x:Key="DirectionLampOFFColor" Color="#122"/>
+
+		<local:IntValueEqualCheckConverter
+			x:Key="LampBrushGen"
+			ReturnWhenTRUE="{StaticResource DirectionLampONColor}"
+			ReturnWhenFALSE="{StaticResource DirectionLampOFFColor}"/>
 
 		<Style TargetType="{x:Type local:CircleScale}">
 			<Setter Property="Foreground" Value="LimeGreen"/>
@@ -103,6 +110,28 @@
 		<Image Source="/TR.caMonPageMod.TypeBDispW;component/TR01Web.png"/>
 		<Rectangle Fill="Black" Opacity="0.6"/>
 
+		<Grid Margin="50,170"
+					Height="340"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top">
+			<Path Fill="{Binding BSMD.ReverserPos, Converter={StaticResource LampBrushGen}, ConverterParameter=1}"
+						Width="120"
+						Height="90"
+						Stretch="Fill"
+						VerticalAlignment="Top"
+						Data="M 0.5,0 L 0,1 L 1,1 Z"/>
+
+			<Ellipse Fill="{Binding BSMD.ReverserPos, Converter={StaticResource LampBrushGen}, ConverterParameter=0}"
+							 Height="110"
+							 Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Height}"/>
+
+			<Path Fill="{Binding BSMD.ReverserPos, Converter={StaticResource LampBrushGen}, ConverterParameter=-1}"
+						Width="120"
+						Height="90"
+						Stretch="Fill"
+						VerticalAlignment="Bottom"
+						Data="M 0,0 L 1,0 L 0.5,1 Z"/>
+		</Grid>
 
 		<!--MR/ER Meter-->
 		<Grid Margin="64,144"
