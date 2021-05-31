@@ -156,6 +156,7 @@
 												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
 												 Needle2Style="{StaticResource Style_RedNeedle}"
 												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 Needle2BitmapEffect="{StaticResource DropShadow}"
 												 MeterSettings="{StaticResource PresMeter}"/>
 
 			<StackPanel Margin="16"
@@ -192,6 +193,7 @@
 												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
 												 Needle2Style="{StaticResource Style_RedNeedle}"
 												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 Needle2BitmapEffect="{StaticResource DropShadow}"
 												 MeterSettings="{StaticResource PresMeter}"/>
 
 			<StackPanel Margin="16"
