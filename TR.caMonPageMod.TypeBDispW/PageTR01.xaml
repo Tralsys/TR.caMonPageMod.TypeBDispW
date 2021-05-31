@@ -111,6 +111,14 @@
 		</Style>
 		<!--#endregion-->
 		
+		<RadialGradientBrush Center="0.51,0.51" x:Key="CircleMeterShadowBrush">
+			<RadialGradientBrush.GradientStops>
+				<GradientStop Color="#8000" Offset="1.015"/>
+				<GradientStop Color="#0000" Offset="0.94"/>
+			</RadialGradientBrush.GradientStops>
+		</RadialGradientBrush>
+
+
 		<!--TO DESIGN-->
 		<local:CircleMeterSettings
 			x:Key="PresMeter"
@@ -218,6 +226,9 @@
 								 VerticalAlignment="Bottom"
 								 HorizontalAlignment="Right"
 								 Margin="90,55"/>
+
+			<!--Shadow Effect-->
+			<Ellipse Fill="{StaticResource CircleMeterShadowBrush}"/>
 		</Grid>
 
 		<!--BC/BP Meter-->
@@ -255,6 +266,9 @@
 								 VerticalAlignment="Bottom"
 								 HorizontalAlignment="Right"
 								 Margin="90,55"/>
+
+			<!--Shadow Effect-->
+			<Ellipse Fill="{StaticResource CircleMeterShadowBrush}"/>
 		</Grid>
 
 		<!--Speed Meter-->
@@ -285,6 +299,8 @@
 									 VerticalAlignment="Bottom"/>
 
 			</StackPanel>
+			<!--Shadow Effect-->
+			<Ellipse Fill="{StaticResource CircleMeterShadowBrush}"/>
 		</Grid>
 		
 		
