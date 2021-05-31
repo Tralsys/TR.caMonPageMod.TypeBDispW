@@ -15,6 +15,8 @@
 		<SolidColorBrush x:Key="DirectionLampONColor" Color="LightYellow"/>
 		<SolidColorBrush x:Key="DirectionLampOFFColor" Color="#122"/>
 
+		<DropShadowBitmapEffect x:Key="DropShadow" />
+
 		<local:IntValueEqualCheckConverter
 			x:Key="LampBrushGen"
 			ReturnWhenTRUE="{StaticResource DirectionLampONColor}"
@@ -67,7 +69,6 @@
 			<Setter Property="Fill" Value="Silver"/>
 		</Style>
 
-		<DropShadowBitmapEffect x:Key="DropShadow" />
 
 		<Style TargetType="TextBlock" x:Key="ConstantTextStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
 			<Setter Property="Foreground" Value="LimeGreen"/>
