@@ -22,6 +22,7 @@
 			ReturnWhenTRUE="{StaticResource DirectionLampONColor}"
 			ReturnWhenFALSE="{StaticResource DirectionLampOFFColor}"/>
 
+		<!--#region Circle Scale Styles-->
 		<Style TargetType="{x:Type local:CircleScale}">
 			<Setter Property="Foreground" Value="LimeGreen"/>
 		</Style>
@@ -44,7 +45,9 @@
 			<Setter Property="MarkWidth" Value="40"/>
 			<Setter Property="Padding" Value="0"/>
 		</Style>
+		<!--#endregion-->
 		
+		<!--#region Needle Styles-->
 		<Style TargetType="{x:Type local:Needle}">
 			<Setter Property="TriangleWidth" Value="30"/>
 			<Setter Property="NeedleHeight" Value="20"/>
@@ -68,8 +71,10 @@
 			<Setter Property="Width" Value="6"/>
 			<Setter Property="Fill" Value="Silver"/>
 		</Style>
+		<!--#endregion-->
+		
 
-
+		<!--#region TextBlock-->
 		<Style TargetType="TextBlock" x:Key="ConstantTextStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
 			<Setter Property="Foreground" Value="LimeGreen"/>
 			<Setter Property="FontSize" Value="40"/>
@@ -93,6 +98,8 @@
 			<Setter Property="Padding" Value="10,0"/>
 		</Style>
 
+		<!--#endregion-->
+		
 		<!--TO DESIGN-->
 		<local:CircleMeterSettings
 			x:Key="PresMeter"
