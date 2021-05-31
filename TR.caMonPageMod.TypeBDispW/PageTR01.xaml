@@ -97,7 +97,18 @@
 			<Setter Property="BitmapEffect" Value="{StaticResource DropShadow}"/>
 			<Setter Property="Padding" Value="10,0"/>
 		</Style>
-
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_PowerBrake" BasedOn="{StaticResource VariableTextStyle}">
+			<Setter Property="FontSize" Value="80"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Padding" Value="10"/>
+		</Style>
+		
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_DOOR">
+			<Setter Property="FontSize" Value="50"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="24"/>
+		</Style>
 		<!--#endregion-->
 		
 		<!--TO DESIGN-->
@@ -118,6 +129,37 @@
 		<Image Source="/TR.caMonPageMod.TypeBDispW;component/TR01Web.png"/>
 		<Rectangle Fill="Black" Opacity="0.6"/>
 
+		<!-- Time / Location -->
+		
+		<!-- Current -->
+		
+		
+		<StackPanel Margin="240,80" Width="240" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<!-- Brake / Power Pos -->
+			<TextBlock Style="{StaticResource VariableTextStyle_PowerBrake}">
+				<Run Text="B"/>
+				<Run Text="{Binding BSMD.BrakeNPos, Mode=OneWay}"/>
+			</TextBlock>
+			<TextBlock Style="{StaticResource VariableTextStyle_PowerBrake}">
+				<Run Text="P"/>
+				<Run Text="{Binding BSMD.PowerNPos, Mode=OneWay}"/>
+			</TextBlock>
+
+			<!-- DOOR -->
+			<local:Lamp
+				IsLampON="{Binding BSMD.IsDoorClosed}"
+				Margin="5"
+				LampedTextBaseBrush="White"
+				LampedTextBrush="Black"
+				LampBaseBrush="{StaticResource DirectionLampOFFColor}"
+				LampBrush="{StaticResource DirectionLampONColor}">
+				<TextBlock
+					Text="DOOR"
+					Style="{StaticResource VariableTextStyle_DOOR}"/>
+			</local:Lamp>
+		</StackPanel>
+		
+		<!--Reverser-->
 		<Grid Margin="50,170"
 					Height="340"
 					HorizontalAlignment="Left"
