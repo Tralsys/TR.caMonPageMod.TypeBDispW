@@ -232,8 +232,8 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Bottom">
 			<local:CircleMeter Radius="240"
-												 CurrentValue="{Binding BSMD.ERPres}"
-												 CurrentValue2="{Binding BSMD.MRPres}"
+												 CurrentValue="{Binding BSMD.ERPres, Converter={StaticResource DoubleToIntConv}}"
+												 CurrentValue2="{Binding BSMD.MRPres, Converter={StaticResource DoubleToIntConv}}"
 												 Background="{StaticResource MeterBGColor}"
 												 TextStyle="{StaticResource MeterTextStyle}"
 												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
@@ -272,8 +272,8 @@
 					HorizontalAlignment="Left"
 					VerticalAlignment="Bottom">
 			<local:CircleMeter Radius="240"
-												 CurrentValue="{Binding BSMD.BPPres}"
-												 CurrentValue2="{Binding BSMD.BCPres}"
+												 CurrentValue="{Binding BSMD.BPPres, Converter={StaticResource DoubleToIntConv}}"
+												 CurrentValue2="{Binding BSMD.BCPres, Converter={StaticResource DoubleToIntConv}}"
 												 Background="{StaticResource MeterBGColor}"
 												 TextStyle="{StaticResource MeterTextStyle}"
 												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
@@ -312,7 +312,7 @@
 					HorizontalAlignment="Right"
 					VerticalAlignment="Bottom">
 			<local:CircleMeter Radius="300"
-												 CurrentValue="{Binding BSMD.MySpeed}"
+												 CurrentValue="{Binding BSMD.MySpeed, Converter={StaticResource DoubleToIntConv}}"
 												 Background="{StaticResource MeterBGColor}"
 												 TextStyle="{StaticResource MeterTextStyle}"
 												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
