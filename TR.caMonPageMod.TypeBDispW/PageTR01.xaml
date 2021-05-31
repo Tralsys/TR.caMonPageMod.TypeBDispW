@@ -109,6 +109,12 @@
 			<Setter Property="HorizontalAlignment" Value="Center"/>
 			<Setter Property="Padding" Value="24"/>
 		</Style>
+
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_TimeLocation" BasedOn="{StaticResource VariableTextStyle}">
+			<Setter Property="FontSize" Value="100"/>
+			<Setter Property="Padding" Value="10,0"/>
+		</Style>
+
 		<!--#endregion-->
 		
 		<RadialGradientBrush Center="0.51,0.51" x:Key="CircleMeterShadowBrush">
@@ -138,6 +144,36 @@
 		<Rectangle Fill="Black" Opacity="0.6"/>
 
 		<!-- Time / Location -->
+		<Grid
+			Background="{StaticResource MeterBGColor}"
+			Margin="160,80"
+			Width="580"
+			HorizontalAlignment="Right"
+			VerticalAlignment="Top">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<TextBlock
+				Style="{StaticResource VariableTextStyle_TimeLocation}"
+				HorizontalAlignment="Center"
+				Grid.Row="0">
+				<TextBlock.Text>
+					<MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+						<Binding Path="BSMD.hour_digi" Mode="OneWay"/>
+						<Binding Path="BSMD.min_digi" Mode="OneWay"/>
+						<Binding Path="BSMD.sec_digi" Mode="OneWay"/>
+					</MultiBinding>
+				</TextBlock.Text>
+			</TextBlock>
+
+			<TextBlock
+				Text="{Binding BSMD.MyLocation, StringFormat={}{0:F1} m, Mode=OneWay}"
+				Style="{StaticResource VariableTextStyle_TimeLocation}"
+				HorizontalAlignment="Right"
+				Grid.Row="1"/>
+		</Grid>
 		
 		<!-- Current -->
 		
