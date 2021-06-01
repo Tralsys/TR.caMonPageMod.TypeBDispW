@@ -11,9 +11,11 @@
 	<UserControl.Resources>
 		<local:DoubleToIntConverter x:Key="DoubleToIntConv"/>
 
-		<SolidColorBrush x:Key="MeterBGColor" Color="#122"/>
-		<SolidColorBrush x:Key="DirectionLampONColor" Color="LightYellow"/>
-		<SolidColorBrush x:Key="DirectionLampOFFColor" Color="#122"/>
+		<SolidColorBrush x:Key="BaseBGColor" Color="#202A2A"/>
+		<SolidColorBrush x:Key="MeterBGColor" Color="#081010"/>
+		<SolidColorBrush x:Key="MeterMarksColor" Color="LimeGreen"/>
+		<SolidColorBrush x:Key="DirectionLampONColor" Color="NavajoWhite"/>
+		<SolidColorBrush x:Key="DirectionLampOFFColor" Color="#011"/>
 
 		<DropShadowBitmapEffect x:Key="DropShadow" />
 
@@ -24,7 +26,7 @@
 
 		<!--#region Circle Scale Styles-->
 		<Style TargetType="{x:Type local:CircleScale}">
-			<Setter Property="Foreground" Value="LimeGreen"/>
+			<Setter Property="Foreground" Value="{StaticResource MeterMarksColor}"/>
 		</Style>
 
 		<Style TargetType="local:CircleScale" x:Key="Style_MarkS" BasedOn="{StaticResource {x:Type local:CircleScale}}">
