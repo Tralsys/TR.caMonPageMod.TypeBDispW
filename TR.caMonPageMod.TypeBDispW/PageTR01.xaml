@@ -10,6 +10,8 @@
 	
 	<UserControl.Resources>
 		<local:DoubleToIntConverter x:Key="DoubleToIntConv"/>
+		<local:DoubleSignInvertConverter x:Key="DoubleSignInvertConv"/>
+		<local:DoubleMultiplConverter x:Key="DoubleMultiplConv"/>
 
 		<SolidColorBrush x:Key="BaseBGColor" Color="#202A2A"/>
 		<SolidColorBrush x:Key="MeterBGColor" Color="#081010"/>
@@ -118,6 +120,20 @@
 		</Style>
 
 		<!--#endregion-->
+
+		<!--#region Current BarChart Marks Style-->
+		<Style TargetType="Rectangle" x:Key="CurrentChartMarksStyle">
+			<Setter Property="Fill" Value="{StaticResource MeterMarksColor}"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="Height" Value="220"/>
+			<Setter Property="Width" Value="2"/>
+		</Style>
+		<Style TargetType="Rectangle" x:Key="CurrentChartMarksStyle_L" BasedOn="{StaticResource CurrentChartMarksStyle}">
+			<Setter Property="Height" Value="240"/>
+			<Setter Property="Width" Value="4"/>
+		</Style>
+		<!--#endregion-->
 		
 		<RadialGradientBrush Center="0.51,0.51" x:Key="CircleMeterShadowBrush">
 			<RadialGradientBrush.GradientStops>
@@ -178,8 +194,80 @@
 		</Grid>
 		
 		<!-- Current -->
-		
-		
+		<Grid
+			Margin="500,80"
+			Height="320"
+			Width="600"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Background="{StaticResource MeterBGColor}">
+
+			<!--#region Labels-->
+			<TextBlock
+				Text="0"
+				Style="{StaticResource ConstantTextStyle}"
+				Margin="0"
+				Width="90"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				TextAlignment="Center"/>
+			<TextBlock
+				Text="{Binding CurrentChartMaxValue, Converter={StaticResource DoubleMultiplConv}, ConverterParameter=0.5, StringFormat={}{0:F0}}"
+				Style="{StaticResource ConstantTextStyle}"
+				Margin="240,0,0,0"
+				Width="110"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				TextAlignment="Center"/>
+			<TextBlock
+				Text="{Binding CurrentChartMaxValue, StringFormat={}{0:F0}}"
+				Style="{StaticResource ConstantTextStyle}"
+				Margin="490,0,0,0"
+				Width="110"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				TextAlignment="Center"/>
+			<!--#endregion-->
+
+			<!--#region Marks-->
+			<Rectangle Margin="43,60,0,0" Style="{StaticResource CurrentChartMarksStyle_L}"/>
+			<Rectangle Margin="94,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="144,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="194,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="244,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="293,60,0,0" Style="{StaticResource CurrentChartMarksStyle_L}"/>
+			<Rectangle Margin="344,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="394,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="444,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="494,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="543,60,0,0" Style="{StaticResource CurrentChartMarksStyle_L}"/>
+			<!--#endregion-->
+
+			<!--Positive Current-->
+			<local:HorizontalBarChart
+			Margin="45,100,0,0"
+			Height="50"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			CurrentValue="{Binding BSMD.Current}"
+			StartValue="0"
+			EndValue="{Binding CurrentChartMaxValue}"
+			RectangleMaxWidth="500"
+			Foreground="LightSkyBlue"/>
+
+			<!--Negative Current-->
+			<local:HorizontalBarChart
+			Margin="45,200,0,0"
+			Height="50"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			CurrentValue="{Binding BSMD.Current}"
+			StartValue="0"
+			EndValue="{Binding CurrentChartMaxValue, Converter={StaticResource DoubleSignInvertConv}}"
+			RectangleMaxWidth="500"
+			Foreground="Orange"/>
+		</Grid>
+
 		<StackPanel Margin="240,80" Width="240" HorizontalAlignment="Left" VerticalAlignment="Top">
 			<!-- Brake / Power Pos -->
 			<TextBlock Style="{StaticResource VariableTextStyle_PowerBrake}">
