@@ -160,4 +160,12 @@ namespace TR.caMonPageMod.TypeBDispW
 			=> throw new NotImplementedException();
 	}
 
+	[ValueConversion(typeof(double), typeof(double))]
+	public class DoubleMultiplConverter : IValueConverter
+	{
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)value * (double.TryParse(parameter as string, out double param) ? param : 1.0);
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+			=> (double)value / (double.TryParse(parameter as string, out double param) ? param : 1.0);
+	}
 }
