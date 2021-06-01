@@ -166,6 +166,7 @@
 			Background="{StaticResource MeterBGColor}"
 			Margin="160,80"
 			Width="580"
+			Height="280"
 			HorizontalAlignment="Right"
 			VerticalAlignment="Top">
 			<Grid.RowDefinitions>
