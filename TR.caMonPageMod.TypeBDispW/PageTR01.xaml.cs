@@ -113,6 +113,9 @@ namespace TR.caMonPageMod.TypeBDispW
 		private CircleMeterSettings _SpeedMeterSetting = null;
 		public CircleMeterSettings SpeedMeterSetting { get => _SpeedMeterSetting; set { _SpeedMeterSetting = value; OnPropertyChanged(nameof(SpeedMeterSetting)); } }
 
+		private double _CurrentChartMaxValue = 1000;
+		public double CurrentChartMaxValue { get => _CurrentChartMaxValue; set { _CurrentChartMaxValue = value; OnPropertyChanged(nameof(CurrentChartMaxValue)); } }
+
 		public BSMD_toBind BSMD { get; } = new();
 	}
 }
