@@ -1,0 +1,18 @@
+﻿<Page x:Class="TR.caMonPageMod.TypeBDispW.CaMonIF"
+			xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			xmlns:local="clr-namespace:TR.caMonPageMod.TypeBDispW"
+			mc:Ignorable="d" 
+			Title="CaMonIF">
+
+	<Viewbox>
+		<Grid>
+			<local:PageTR01/>
+			<TextBlock Foreground="Black" Text="Copyright (C) 2021 Tetsu Otter" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+			<Button Content="HOME" Click="HomeClicked" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="8" Margin="8"/>
+			<Button Content="CLOSE" Click="CloseClicked" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="8" Margin="8"/>
+		</Grid>
+	</Viewbox>
+</Page>

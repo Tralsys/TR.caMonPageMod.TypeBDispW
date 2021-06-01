@@ -1,0 +1,432 @@
+﻿<UserControl x:Class="TR.caMonPageMod.TypeBDispW.PageTR01"
+						 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+						 xmlns:local="clr-namespace:TR.caMonPageMod.TypeBDispW"
+						 d:DataContext="{d:DesignInstance Type=local:PageTR01DataClass}"
+						 mc:Ignorable="d" 
+						 Height="1200" Width="1920">
+	
+	<UserControl.Resources>
+		<local:DoubleToIntConverter x:Key="DoubleToIntConv"/>
+		<local:DoubleSignInvertConverter x:Key="DoubleSignInvertConv"/>
+		<local:DoubleMultiplConverter x:Key="DoubleMultiplConv"/>
+
+		<SolidColorBrush x:Key="BaseBGColor" Color="#202A2A"/>
+		<SolidColorBrush x:Key="MeterBGColor" Color="#081010"/>
+		<SolidColorBrush x:Key="MeterMarksColor" Color="LimeGreen"/>
+		<SolidColorBrush x:Key="DirectionLampONColor" Color="NavajoWhite"/>
+		<SolidColorBrush x:Key="DirectionLampOFFColor" Color="#011"/>
+
+		<DropShadowBitmapEffect x:Key="DropShadow" />
+
+		<local:IntValueEqualCheckConverter
+			x:Key="LampBrushGen"
+			ReturnWhenTRUE="{StaticResource DirectionLampONColor}"
+			ReturnWhenFALSE="{StaticResource DirectionLampOFFColor}"/>
+
+		<!--#region Circle Scale Styles-->
+		<Style TargetType="{x:Type local:CircleScale}">
+			<Setter Property="Foreground" Value="{StaticResource MeterMarksColor}"/>
+		</Style>
+
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkS" BasedOn="{StaticResource {x:Type local:CircleScale}}">
+			<Setter Property="MarkHeight" Value="3"/>
+			<Setter Property="MarkWidth" Value="20"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkS_Pres" BasedOn="{StaticResource Style_MarkS}">
+			<Setter Property="Padding" Value="20"/>
+		</Style>
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkM" BasedOn="{StaticResource {x:Type local:CircleScale}}">
+			<Setter Property="MarkHeight" Value="3"/>
+			<Setter Property="MarkWidth" Value="40"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<Style TargetType="local:CircleScale" x:Key="Style_MarkL" BasedOn="{StaticResource {x:Type local:CircleScale}}">
+			<Setter Property="MarkHeight" Value="6"/>
+			<Setter Property="MarkWidth" Value="40"/>
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+		<!--#endregion-->
+		
+		<!--#region Needle Styles-->
+		<Style TargetType="{x:Type local:Needle}">
+			<Setter Property="TriangleWidth" Value="30"/>
+			<Setter Property="NeedleHeight" Value="20"/>
+			<Setter Property="WeightRectangleWidth" Value="60"/>
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="CenterCircleRadius" Value="18"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="Margin" Value="40"/>
+			<Setter Property="Padding" Value="30"/>
+		</Style>
+
+		<Style TargetType="{x:Type local:Needle}" BasedOn="{StaticResource {x:Type local:Needle}}" x:Key="Style_RedNeedle">
+			<Setter Property="NeedleHeight" Value="14"/>
+			<Setter Property="Foreground" Value="Red"/>
+			<Setter Property="CenterCircleRadius" Value="15"/>
+		</Style>
+
+		<Style TargetType="Ellipse" x:Key="MeterCenterPinStyle">
+			<Setter Property="Height" Value="6"/>
+			<Setter Property="Width" Value="6"/>
+			<Setter Property="Fill" Value="Silver"/>
+		</Style>
+		<!--#endregion-->
+		
+
+		<!--#region TextBlock-->
+		<Style TargetType="TextBlock" x:Key="ConstantTextStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+			<Setter Property="Foreground" Value="LimeGreen"/>
+			<Setter Property="FontSize" Value="40"/>
+		</Style>
+		<Style TargetType="TextBlock" x:Key="MeterTextStyle" BasedOn="{StaticResource ConstantTextStyle}">
+			<Setter Property="Padding" Value="45"/>
+		</Style>
+		<Style TargetType="TextBlock" x:Key="MeterTextStyle_Speed" BasedOn="{StaticResource MeterTextStyle}">
+			<Setter Property="FontStyle" Value="Italic"/>
+		</Style>
+		
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle" BasedOn="{StaticResource {x:Type TextBlock}}">
+			<Setter Property="Foreground" Value="White"/>
+			<Setter Property="FontSize" Value="40"/>
+		</Style>
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_Speed" BasedOn="{StaticResource VariableTextStyle}">
+			<Setter Property="FontSize" Value="100"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontStyle" Value="Italic"/>
+			<Setter Property="BitmapEffect" Value="{StaticResource DropShadow}"/>
+			<Setter Property="Padding" Value="10,0"/>
+		</Style>
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_PowerBrake" BasedOn="{StaticResource VariableTextStyle}">
+			<Setter Property="FontSize" Value="80"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Padding" Value="10"/>
+		</Style>
+		
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_DOOR">
+			<Setter Property="FontSize" Value="50"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="Padding" Value="24"/>
+		</Style>
+
+		<Style TargetType="TextBlock" x:Key="VariableTextStyle_TimeLocation" BasedOn="{StaticResource VariableTextStyle}">
+			<Setter Property="FontSize" Value="100"/>
+			<Setter Property="Padding" Value="10,0"/>
+		</Style>
+
+		<!--#endregion-->
+
+		<!--#region Current BarChart Marks Style-->
+		<Style TargetType="Rectangle" x:Key="CurrentChartMarksStyle">
+			<Setter Property="Fill" Value="{StaticResource MeterMarksColor}"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="VerticalAlignment" Value="Top"/>
+			<Setter Property="Height" Value="220"/>
+			<Setter Property="Width" Value="2"/>
+		</Style>
+		<Style TargetType="Rectangle" x:Key="CurrentChartMarksStyle_L" BasedOn="{StaticResource CurrentChartMarksStyle}">
+			<Setter Property="Height" Value="240"/>
+			<Setter Property="Width" Value="4"/>
+		</Style>
+		<!--#endregion-->
+		
+		<RadialGradientBrush Center="0.51,0.51" x:Key="CircleMeterShadowBrush">
+			<RadialGradientBrush.GradientStops>
+				<GradientStop Color="#8000" Offset="1.015"/>
+				<GradientStop Color="#0000" Offset="0.94"/>
+			</RadialGradientBrush.GradientStops>
+		</RadialGradientBrush>
+
+
+		<!--TO DESIGN-->
+		<local:CircleMeterSettings
+			x:Key="PresMeter"
+			StartAngle="-40"
+			EndAngle="220"
+			StartValue="0"
+			EndValue="1000"
+			TextStep="200"
+			MarkLStep="100"
+			MarkMStep="5"
+			MarkMVisibility="Collapsed"
+			MarkSStep="20"/>
+	</UserControl.Resources>
+	
+	<Grid Background="{StaticResource BaseBGColor}">
+		<!-- Time / Location -->
+		<Grid
+			Background="{StaticResource MeterBGColor}"
+			Margin="160,80"
+			Width="580"
+			Height="280"
+			HorizontalAlignment="Right"
+			VerticalAlignment="Top">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+
+			<TextBlock
+				Style="{StaticResource VariableTextStyle_TimeLocation}"
+				HorizontalAlignment="Center"
+				Grid.Row="0">
+				<TextBlock.Text>
+					<MultiBinding StringFormat="{}{0:D2}:{1:D2}:{2:D2}">
+						<Binding Path="BSMD.hour_digi" Mode="OneWay"/>
+						<Binding Path="BSMD.min_digi" Mode="OneWay"/>
+						<Binding Path="BSMD.sec_digi" Mode="OneWay"/>
+					</MultiBinding>
+				</TextBlock.Text>
+			</TextBlock>
+
+			<TextBlock
+				Text="{Binding BSMD.MyLocation, StringFormat={}{0:F1} m, Mode=OneWay}"
+				Style="{StaticResource VariableTextStyle_TimeLocation}"
+				HorizontalAlignment="Right"
+				Grid.Row="1"/>
+		</Grid>
+		
+		<!-- Current -->
+		<Grid
+			Margin="500,80"
+			Height="320"
+			Width="600"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Background="{StaticResource MeterBGColor}">
+
+			<!--#region Labels-->
+			<TextBlock
+				Text="0"
+				Style="{StaticResource ConstantTextStyle}"
+				Margin="0"
+				Width="90"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				TextAlignment="Center"/>
+			<TextBlock
+				Text="{Binding CurrentChartMaxValue, Converter={StaticResource DoubleMultiplConv}, ConverterParameter=0.5, StringFormat={}{0:F0}}"
+				Style="{StaticResource ConstantTextStyle}"
+				Margin="240,0,0,0"
+				Width="110"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				TextAlignment="Center"/>
+			<TextBlock
+				Text="{Binding CurrentChartMaxValue, StringFormat={}{0:F0}}"
+				Style="{StaticResource ConstantTextStyle}"
+				Margin="490,0,0,0"
+				Width="110"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				TextAlignment="Center"/>
+			<!--#endregion-->
+
+			<!--#region Marks-->
+			<Rectangle Margin="43,60,0,0" Style="{StaticResource CurrentChartMarksStyle_L}"/>
+			<Rectangle Margin="94,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="144,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="194,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="244,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="293,60,0,0" Style="{StaticResource CurrentChartMarksStyle_L}"/>
+			<Rectangle Margin="344,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="394,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="444,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="494,80,0,0" Style="{StaticResource CurrentChartMarksStyle}"/>
+			<Rectangle Margin="543,60,0,0" Style="{StaticResource CurrentChartMarksStyle_L}"/>
+			<!--#endregion-->
+
+			<!--Positive Current-->
+			<local:HorizontalBarChart
+			Margin="45,100,0,0"
+			Height="50"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			CurrentValue="{Binding BSMD.Current}"
+			StartValue="0"
+			EndValue="{Binding CurrentChartMaxValue}"
+			RectangleMaxWidth="500"
+			Foreground="LightSkyBlue"/>
+
+			<!--Negative Current-->
+			<local:HorizontalBarChart
+			Margin="45,200,0,0"
+			Height="50"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			CurrentValue="{Binding BSMD.Current}"
+			StartValue="0"
+			EndValue="{Binding CurrentChartMaxValue, Converter={StaticResource DoubleSignInvertConv}}"
+			RectangleMaxWidth="500"
+			Foreground="Orange"/>
+		</Grid>
+
+		<StackPanel Margin="240,80" Width="240" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<!-- Brake / Power Pos -->
+			<TextBlock Style="{StaticResource VariableTextStyle_PowerBrake}">
+				<Run Text="B"/>
+				<Run Text="{Binding BSMD.BrakeNPos, Mode=OneWay}"/>
+			</TextBlock>
+			<TextBlock Style="{StaticResource VariableTextStyle_PowerBrake}">
+				<Run Text="P"/>
+				<Run Text="{Binding BSMD.PowerNPos, Mode=OneWay}"/>
+			</TextBlock>
+
+			<!-- DOOR -->
+			<local:Lamp
+				IsLampON="{Binding BSMD.IsDoorClosed}"
+				Margin="5"
+				LampedTextBaseBrush="White"
+				LampedTextBrush="Black"
+				LampBaseBrush="{StaticResource DirectionLampOFFColor}"
+				LampBrush="{StaticResource DirectionLampONColor}">
+				<TextBlock
+					Text="DOOR"
+					Style="{StaticResource VariableTextStyle_DOOR}"/>
+			</local:Lamp>
+		</StackPanel>
+		
+		<!--Reverser-->
+		<Grid Margin="50,170"
+					Height="340"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top">
+			<Path Fill="{Binding BSMD.ReverserPos, Converter={StaticResource LampBrushGen}, ConverterParameter=1}"
+						Width="120"
+						Height="90"
+						Stretch="Fill"
+						VerticalAlignment="Top"
+						Data="M 0.5,0 L 0,1 L 1,1 Z"/>
+
+			<Ellipse Fill="{Binding BSMD.ReverserPos, Converter={StaticResource LampBrushGen}, ConverterParameter=0}"
+							 Height="110"
+							 Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=Height}"/>
+
+			<Path Fill="{Binding BSMD.ReverserPos, Converter={StaticResource LampBrushGen}, ConverterParameter=-1}"
+						Width="120"
+						Height="90"
+						Stretch="Fill"
+						VerticalAlignment="Bottom"
+						Data="M 0,0 L 1,0 L 0.5,1 Z"/>
+		</Grid>
+
+		<!--MR/ER Meter-->
+		<Grid Margin="64,144"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Bottom">
+			<local:CircleMeter Radius="240"
+												 CurrentValue="{Binding BSMD.ERPres, Converter={StaticResource DoubleToIntConv}}"
+												 CurrentValue2="{Binding BSMD.MRPres, Converter={StaticResource DoubleToIntConv}}"
+												 Background="{StaticResource MeterBGColor}"
+												 TextStyle="{StaticResource MeterTextStyle}"
+												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+												 MarkSStyle="{StaticResource Style_MarkS_Pres}"
+												 MarkLStyle="{StaticResource Style_MarkL}"
+												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+												 Needle2Style="{StaticResource Style_RedNeedle}"
+												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 Needle2BitmapEffect="{StaticResource DropShadow}"
+												 MeterSettings="{StaticResource PresMeter}"/>
+
+			<StackPanel Margin="16"
+									Orientation="Horizontal"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Bottom">
+				<TextBlock Text="MR"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="Red"/>
+				<TextBlock Text="/ER"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="White"/>
+			</StackPanel>
+			
+			<TextBlock Text="kPa"
+								 Style="{StaticResource ConstantTextStyle}"
+								 VerticalAlignment="Bottom"
+								 HorizontalAlignment="Right"
+								 Margin="90,55"/>
+
+			<!--Shadow Effect-->
+			<Ellipse Fill="{StaticResource CircleMeterShadowBrush}"/>
+		</Grid>
+
+		<!--BC/BP Meter-->
+		<Grid Margin="600,144"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Bottom">
+			<local:CircleMeter Radius="240"
+												 CurrentValue="{Binding BSMD.BPPres, Converter={StaticResource DoubleToIntConv}}"
+												 CurrentValue2="{Binding BSMD.BCPres, Converter={StaticResource DoubleToIntConv}}"
+												 Background="{StaticResource MeterBGColor}"
+												 TextStyle="{StaticResource MeterTextStyle}"
+												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+												 MarkSStyle="{StaticResource Style_MarkS_Pres}"
+												 MarkLStyle="{StaticResource Style_MarkL}"
+												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+												 Needle2Style="{StaticResource Style_RedNeedle}"
+												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 Needle2BitmapEffect="{StaticResource DropShadow}"
+												 MeterSettings="{StaticResource PresMeter}"/>
+
+			<StackPanel Margin="16"
+									Orientation="Horizontal"
+									HorizontalAlignment="Center"
+									VerticalAlignment="Bottom">
+				<TextBlock Text="BC"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="Red"/>
+				<TextBlock Text="/BP"
+									 Style="{StaticResource ConstantTextStyle}"
+									 Foreground="White"/>
+			</StackPanel>
+
+			<TextBlock Text="kPa"
+								 Style="{StaticResource ConstantTextStyle}"
+								 VerticalAlignment="Bottom"
+								 HorizontalAlignment="Right"
+								 Margin="90,55"/>
+
+			<!--Shadow Effect-->
+			<Ellipse Fill="{StaticResource CircleMeterShadowBrush}"/>
+		</Grid>
+
+		<!--Speed Meter-->
+		<Grid Margin="120,140"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Bottom">
+			<local:CircleMeter Radius="300"
+												 CurrentValue="{Binding BSMD.MySpeed, Converter={StaticResource DoubleToIntConv}}"
+												 Background="{StaticResource MeterBGColor}"
+												 TextStyle="{StaticResource MeterTextStyle}"
+												 CenterPinStyle="{StaticResource MeterCenterPinStyle}"
+												 MarkSStyle="{StaticResource Style_MarkS}"
+												 MarkMStyle="{StaticResource Style_MarkM}"
+												 MarkLStyle="{StaticResource Style_MarkL}"
+												 NeedleStyle="{StaticResource {x:Type local:Needle}}"
+												 NeedleBitmapEffect="{StaticResource DropShadow}"
+												 MeterSettings="{Binding SpeedMeterSetting}"/>
+
+			<StackPanel Margin="130,55"
+									HorizontalAlignment="Right"
+									VerticalAlignment="Bottom"
+									Orientation="Horizontal">
+				<TextBlock Text="{Binding BSMD.MySpeed, Converter={StaticResource DoubleToIntConv}}"
+									 Style="{StaticResource VariableTextStyle_Speed}"/>
+
+				<TextBlock Text="km/h"
+									 Style="{StaticResource ConstantTextStyle}"
+									 VerticalAlignment="Bottom"/>
+
+			</StackPanel>
+			<!--Shadow Effect-->
+			<Ellipse Fill="{StaticResource CircleMeterShadowBrush}"/>
+		</Grid>
+		
+		
+	</Grid>
+</UserControl>
