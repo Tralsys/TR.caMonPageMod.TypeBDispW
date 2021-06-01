@@ -157,10 +157,7 @@
 			MarkSStep="20"/>
 	</UserControl.Resources>
 	
-	<Grid>
-		<Image Source="/TR.caMonPageMod.TypeBDispW;component/TR01Web.png"/>
-		<Rectangle Fill="Black" Opacity="0.6"/>
-
+	<Grid Background="{StaticResource BaseBGColor}">
 		<!-- Time / Location -->
 		<Grid
 			Background="{StaticResource MeterBGColor}"
